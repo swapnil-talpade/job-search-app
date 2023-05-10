@@ -43,7 +43,6 @@ const Popularjobs = () => {
             keyExtractor={(item) => item?.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal={true}
-            showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => <PopularJobCard item={item} />}
           />
         )}
