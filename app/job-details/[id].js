@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import ScreenHeaderBtn from "../../components/common/header/ScreenHeaderBtn";
 import Company from "../../components/jobdetails/company/Company";
+import Specifics from "../../components/jobdetails/specifics/Specifics";
 import Tabs from "../../components/jobdetails/tabs/Tabs";
 import { COLORS, SIZES, icons } from "../../constants";
 import { dummyData } from "../../data/data";
@@ -27,6 +28,20 @@ const JobDetails = () => {
   const error = false;
 
   const onRefresh = () => {};
+
+  const displayTabContent = () => {
+    switch (activeTab) {
+      case "Qualifications":
+        return (
+          <Specifics
+            title="Qualifications"
+            points={dummyData[0].job_highlights?.Qualifications ?? ["N/A"]}
+          />
+        );
+      case "About":
+      case "Responsibilities":
+    }
+  };
 
   // const { isLoading, error, data, refetch} = useFetch("job-details", {
   //   job_id: params.id,
@@ -78,6 +93,7 @@ const JobDetails = () => {
               activeTab={activeTab}
               setActiveTab={setActiveTab}
             />
+            {displayTabContent()}
           </View>
         )}
       </ScrollView>
