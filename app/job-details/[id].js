@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import ScreenHeaderBtn from "../../components/common/header/ScreenHeaderBtn";
+import About from "../../components/jobdetails/about/About";
 import Company from "../../components/jobdetails/company/Company";
 import Specifics from "../../components/jobdetails/specifics/Specifics";
 import Tabs from "../../components/jobdetails/tabs/Tabs";
@@ -39,6 +40,9 @@ const JobDetails = () => {
           />
         );
       case "About":
+        return (
+          <About info={dummyData[0].job_description ?? "No data provided"} />
+        );
       case "Responsibilities":
     }
   };
