@@ -4,19 +4,19 @@ import styles from "./nearbyjobs.style.js";
 
 import { useRouter } from "expo-router";
 import { COLORS } from "../../../constants";
-import { useFetch } from "../../../hook/useFetchHook.js";
+import { dummyData } from "../../../data/data.js";
 import NearbyJobCard from "../../common/cards/nearby/NearbyJobCard.jsx";
 
 const NearbyJobs = () => {
   const router = useRouter();
 
-  // const isLoading = false;
-  // const error = false;
+  const isLoading = false;
+  const error = false;
 
-  const { isLoading, error, data } = useFetch("search", {
-    query: "React developer",
-    num_pages: 1,
-  });
+  // const { isLoading, error, data } = useFetch("search", {
+  //   query: "React developer",
+  //   num_pages: 1,
+  // });
 
   return (
     <View style={styles.container}>
@@ -32,7 +32,7 @@ const NearbyJobs = () => {
         ) : error ? (
           <Text>Something went wrong</Text>
         ) : (
-          data?.map((job) => (
+          dummyData?.map((job) => (
             <NearbyJobCard
               key={job?.job_id}
               job={job}
