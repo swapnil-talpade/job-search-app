@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -11,18 +11,25 @@ import styles from "./popularjobs.style.js";
 
 import { useRouter } from "expo-router";
 import { COLORS, SIZES } from "../../../constants";
-// import { useFetch } from "../../../hook/useFetchHook.js";
-import { dummyData } from "../../../data/data.js";
+import { useFetch } from "../../../hook/useFetchHook.js";
+// import { dummyData } from "../../../data/data.js";
+
 const Popularjobs = () => {
   const router = useRouter();
+  const [selectedJob, setSelectedJob] = useState();
 
-  const isLoading = false;
-  const error = false;
+  // const isLoading = false;
+  // const error = false;
 
-  // const { isLoading, error, data } = useFetch("search", {
-  //   query: "React developer",
-  //   num_pages: 1,
-  // });
+  const { isLoading, error, data } = useFetch("search", {
+    query: "React developer",
+    num_pages: 1,
+  });
+
+  const handlePress = (item) => {
+    router.push(`/job-details/${item?.job_id}`);
+    setSelectedJob(item?.job_id);
+  };
 
   return (
     <View style={styles.container}>
@@ -39,18 +46,15 @@ const Popularjobs = () => {
           <Text>Something went wrong</Text>
         ) : (
           <FlatList
-            data={dummyData}
+            data={data}
             keyExtractor={(item) => item?.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal={true}
             renderItem={({ item }) => (
               <PopularJobCard
                 item={item}
-                handleCardPress={() =>
-                  router.push(`/job-details/${item.job_id}`, {
-                    item,
-                  })
-                }
+                selectedJob={selectedJob}
+                handleCardPress={(item) => handlePress(item)}
               />
             )}
           />

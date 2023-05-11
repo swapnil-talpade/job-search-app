@@ -1,5 +1,5 @@
 import { Stack, useRouter, useSearchParams } from "expo-router";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   ActivityIndicator,
   RefreshControl,
@@ -15,7 +15,8 @@ import Footer from "../../components/jobdetails/footer/Footer";
 import Specifics from "../../components/jobdetails/specifics/Specifics";
 import Tabs from "../../components/jobdetails/tabs/Tabs";
 import { COLORS, SIZES, icons } from "../../constants";
-import { dummyData } from "../../data/data";
+import { useFetch } from "../../hook/useFetchHook";
+// import { dummyData } from "../../data/data";
 
 const tabs = ["About", "Qualifications", "Responsibilities"];
 
@@ -26,10 +27,18 @@ const JobDetails = ({}) => {
   const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
-  const isLoading = false;
-  const error = false;
+  // const isLoading = false;
+  // const error = false;
 
-  const onRefresh = () => {};
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, []);
+
+  const { data, isLoading, error, refetch } = useFetch("job-details", {
+    job_id: params.id,
+  });
 
   const displayTabContent = () => {
     switch (activeTab) {
@@ -37,18 +46,16 @@ const JobDetails = ({}) => {
         return (
           <Specifics
             title="Qualifications"
-            points={dummyData[0].job_highlights?.Qualifications ?? ["N/A"]}
+            points={data[0]?.job_highlights?.Qualifications ?? ["N/A"]}
           />
         );
       case "About":
-        return (
-          <About info={dummyData[0].job_description ?? "No data provided"} />
-        );
+        return <About info={data[0]?.job_description ?? "No data provided"} />;
       case "Responsibilities":
         return (
           <Specifics
             title="Responsibilities"
-            points={dummyData[0].job_highlights?.Responsibilities ?? ["N/A"]}
+            points={data[0]?.job_highlights?.Responsibilities ?? ["N/A"]}
           />
         );
     }
@@ -89,15 +96,15 @@ const JobDetails = ({}) => {
           <ActivityIndicator size={"large"} color={COLORS.primary} />
         ) : error ? (
           <Text>Something went wrong</Text>
-        ) : dummyData.length === 0 ? (
+        ) : data.length === 0 ? (
           <Text>No data</Text>
         ) : (
           <View style={{ padding: SIZES.medium, paddingBottom: 100 }}>
             <Company
-              companyLogo={dummyData[0].employer_logo}
-              jobTitle={dummyData[0].job_title}
-              companyName={dummyData[0].employer_name}
-              location={dummyData[0].job_country}
+              companyLogo={data[0]?.employer_logo}
+              jobTitle={data[0]?.job_title}
+              companyName={data[0]?.employer_name}
+              location={data[0]?.job_country}
             />
             <Tabs
               tabs={tabs}
@@ -110,8 +117,7 @@ const JobDetails = ({}) => {
       </ScrollView>
       <Footer
         url={
-          dummyData[0].job_google_link ??
-          "https://careers.google.com/jobs/results"
+          data[0]?.job_google_link ?? "https://careers.google.com/jobs/results"
         }
       />
     </SafeAreaView>
