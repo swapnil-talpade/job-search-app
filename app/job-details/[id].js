@@ -14,11 +14,14 @@ import Tabs from "../../components/jobdetails/tabs/Tabs";
 import { COLORS, SIZES, icons } from "../../constants";
 import { dummyData } from "../../data/data";
 
+const tabs = ["About", "Qualifications", "Responsibilities"];
+
 const JobDetails = () => {
   const params = useSearchParams();
   const router = useRouter();
 
   const [refreshing, setRefreshing] = useState(false);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
 
   const isLoading = false;
   const error = false;
@@ -64,8 +67,17 @@ const JobDetails = () => {
           <Text>No data</Text>
         ) : (
           <View style={{ padding: SIZES.medium, paddingBottom: 100 }}>
-            <Company />
-            <Tabs />
+            <Company
+              companyLogo={dummyData[0].employer_logo}
+              jobTitle={dummyData[0].job_title}
+              companyName={dummyData[0].employer_name}
+              location={dummyData[0].job_country}
+            />
+            <Tabs
+              tabs={tabs}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
           </View>
         )}
       </ScrollView>
