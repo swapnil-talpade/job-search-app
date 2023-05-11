@@ -43,7 +43,16 @@ const Popularjobs = () => {
             keyExtractor={(item) => item?.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal={true}
-            renderItem={({ item }) => <PopularJobCard item={item} />}
+            renderItem={({ item }) => (
+              <PopularJobCard
+                item={item}
+                handleCardPress={() =>
+                  router.push(`/job-details/${item.job_id}`, {
+                    item,
+                  })
+                }
+              />
+            )}
           />
         )}
       </View>

@@ -11,6 +11,7 @@ import {
 import ScreenHeaderBtn from "../../components/common/header/ScreenHeaderBtn";
 import About from "../../components/jobdetails/about/About";
 import Company from "../../components/jobdetails/company/Company";
+import Footer from "../../components/jobdetails/footer/Footer";
 import Specifics from "../../components/jobdetails/specifics/Specifics";
 import Tabs from "../../components/jobdetails/tabs/Tabs";
 import { COLORS, SIZES, icons } from "../../constants";
@@ -18,7 +19,7 @@ import { dummyData } from "../../data/data";
 
 const tabs = ["About", "Qualifications", "Responsibilities"];
 
-const JobDetails = () => {
+const JobDetails = ({}) => {
   const params = useSearchParams();
   const router = useRouter();
 
@@ -107,6 +108,12 @@ const JobDetails = () => {
           </View>
         )}
       </ScrollView>
+      <Footer
+        url={
+          dummyData[0].job_google_link ??
+          "https://careers.google.com/jobs/results"
+        }
+      />
     </SafeAreaView>
   );
 };
