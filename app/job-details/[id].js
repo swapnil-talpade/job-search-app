@@ -44,6 +44,12 @@ const JobDetails = () => {
           <About info={dummyData[0].job_description ?? "No data provided"} />
         );
       case "Responsibilities":
+        return (
+          <Specifics
+            title="Responsibilities"
+            points={dummyData[0].job_highlights?.Responsibilities ?? ["N/A"]}
+          />
+        );
     }
   };
 
