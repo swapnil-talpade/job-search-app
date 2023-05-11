@@ -1,5 +1,5 @@
 # Job Search App 🧳
-### This apps allows you to search to jobs across the internet and apply to them, has tabs for quickly searching job types like full-time, internship, freelance etc.
+### This apps allows you to search for jobs across the internet and apply, has tabs for quickly searching job types like full-time, internship, freelance etc.
 
 ## Glimpse of app ✨
 
