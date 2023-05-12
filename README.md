@@ -1,15 +1,15 @@
-# Expo Router Example
+# Job Search App 🧳
+### This apps allows you to search for jobs across the internet and apply, has tabs for quickly searching job types like full-time, internship, freelance etc.
 
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
+## Glimpse of app ✨
 
-## 🚀 How to use
+<div align="center">
+<img src="./demos/main-screen.png" width="20%" height="100%"/>
+<img src="./demos/about-details-screen.png"  width="20%" height="100%" />
+<img src="./demos/qualification-details-screen.png"  width="20%" height="100%" />
+<img src="./demos/search-screen.png"  width="20%" height="100%" />
+</div>
 
-```sh
-npx create-react-native-app -t with-router
-```
+## App Demo
 
-## 📝 Notes
-
-- [Expo Router: Docs](https://expo.github.io/router)
-- [Expo Router: Repo](https://github.com/expo/router)
-- [Request for Comments](https://github.com/expo/router/discussions/1)
+[App Demo](https://drive.google.com/file/d/14FVJ_-GfCog1xUxp3ejRqUkm1gWw6Kz8/view?usp=sharing)
